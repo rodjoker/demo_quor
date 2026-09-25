@@ -17,12 +17,11 @@ import {
   type StockLevel,
 } from '@/components/ui'
 import { CATEGORY_LABEL, categoryLabel, formatCOP, formatDateTime } from '@/lib/format'
-import { PRODUCTS } from '@/lib/mock/seed'
-import { StoreError, adjustStock, useStore } from '@/lib/mock/store'
+import { useStore } from '@/lib/data/context'
+import { StoreError } from '@/lib/data/types'
 import { can } from '@/lib/roles'
 import type { Product, Role } from '@/lib/types'
 
-const CATEGORIES = Object.keys(CATEGORY_LABEL).filter(c => PRODUCTS.some(p => p.category === c))
 const REASON_LABEL: Record<string, string> = {
   sale: 'Venta',
   cancel_restock: 'Cancelación',
@@ -30,8 +29,13 @@ const REASON_LABEL: Record<string, string> = {
   sync: 'Sincronización',
 }
 
-export default function StockTable({ role, userName }: { role: Role; userName: string }) {
-  const { stock, movements } = useStore()
+export default function StockTable({ role }: { role: Role }) {
+  const { stock, movements, products: PRODUCTS, adjustStock, live } = useStore()
+  const CATEGORIES = useMemo(
+    () => Object.keys(CATEGORY_LABEL).filter(c => PRODUCTS.some(p => p.category === c)),
+    [PRODUCTS],
+  )
+  const [saving, setSaving] = useState(false)
   const canEdit = can.editStock(role)
 
   const [query, setQuery] = useState('')
@@ -48,7 +52,7 @@ export default function StockTable({ role, userName }: { role: Role; userName: s
     const c = { ok: 0, low: 0, out: 0 }
     for (const p of PRODUCTS) c[stockLevel(stock[p.id] ?? 0)]++
     return c
-  }, [stock])
+  }, [stock, PRODUCTS])
 
   const shown = PRODUCTS.filter(p => {
     const q = query.trim().toLowerCase()
@@ -64,15 +68,22 @@ export default function StockTable({ role, userName }: { role: Role; userName: s
     setFormError(null)
   }
 
-  const save = () => {
-    if (!editing) return
+  const save = async () => {
+    if (!editing || saving) return
+    if (newQty.trim() === '') {
+      setFormError('Escribe la nueva cantidad.')
+      return
+    }
+    setSaving(true)
     try {
-      adjustStock(editing.id, Number(newQty), role, userName, note.trim() || undefined)
+      await adjustStock(editing.id, Number(newQty), note.trim() || undefined)
       setEditing(null)
       setToast('Stock actualizado. Los formularios ya lo ven.')
       setTimeout(() => setToast(null), 3500)
     } catch (e) {
       setFormError(e instanceof StoreError ? e.message : 'No se pudo guardar.')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -85,7 +96,7 @@ export default function StockTable({ role, userName }: { role: Role; userName: s
         subtitle={canEdit ? 'Edita el stock y se refleja al instante en los pedidos.' : 'Consulta de stock en solo lectura.'}
         actions={
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink">
-            <RefreshCw className="size-3.5 text-ok" aria-hidden /> Matrix (simulada): sincronizada
+            <RefreshCw className={cx('size-3.5', live ? 'text-ok' : 'text-warn')} aria-hidden /> {live ? 'En vivo' : 'Sin conexión en vivo'}
           </span>
         }
       />
@@ -155,8 +166,8 @@ export default function StockTable({ role, userName }: { role: Role; userName: s
             <button className={btn.secondary} onClick={() => setEditing(null)}>
               Cancelar
             </button>
-            <button className={btn.primary} onClick={save}>
-              Guardar
+            <button className={btn.primary} onClick={() => void save()} disabled={saving}>
+              {saving ? 'Guardando…' : 'Guardar'}
             </button>
           </>
         }

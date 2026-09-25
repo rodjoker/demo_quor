@@ -5,49 +5,48 @@ import { useMemo, useState } from 'react'
 import { CircleCheck, Minus, Plus, Search, ShoppingCart, TriangleAlert } from 'lucide-react'
 import { Card, EmptyState, Modal, PageHeader, ProductThumb, StockBadge, Toast, btn, cx, inputCls } from '@/components/ui'
 import { CATEGORY_LABEL, categoryLabel, formatCOP, formatOrderNumber } from '@/lib/format'
-import { CUSTOMERS, CUSTOMER_BY_ID, PRODUCTS, PRODUCT_BY_ID } from '@/lib/mock/seed'
-import { StoreError, placeOrder, useStore, type PlaceOrderResult } from '@/lib/mock/store'
+import { useStore } from '@/lib/data/context'
+import { StoreError, type PlaceOrderResult } from '@/lib/data/types'
 import { can } from '@/lib/roles'
-import type { Product, Role } from '@/lib/types'
+import type { Customer, Product, Role } from '@/lib/types'
 
-const CATEGORIES = Object.keys(CATEGORY_LABEL).filter(c => PRODUCTS.some(p => p.category === c))
-
-export default function NewOrder({
-  role,
-  userName,
-  ownCustomerId,
-}: {
-  role: Role
-  userName: string
-  ownCustomerId: string
-}) {
-  const { stock } = useStore()
+export default function NewOrder({ role, ownCustomerId }: { role: Role; ownCustomerId: string }) {
+  const { stock, products, productById, customers, customerById, placeOrder, live } = useStore()
   const forOthers = can.orderForOthers(role)
 
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<string>('todas')
   const [qty, setQty] = useState<Record<string, number>>({})
-  const [customerId, setCustomerId] = useState(forOthers ? CUSTOMERS[0].id : ownCustomerId)
+  const [pickedCustomer, setPickedCustomer] = useState('')
   const [cartOpen, setCartOpen] = useState(false)
   const [shortageOpen, setShortageOpen] = useState(false)
+  const [busy, setBusy] = useState(false)
   const [result, setResult] = useState<PlaceOrderResult | null>(null)
   const [toast, setToast] = useState<{ message: string; kind: 'ok' | 'error' } | null>(null)
+
+  // Vendedor/admin eligen a nombre de quién compran; el cliente siempre compra a su nombre
+  const customerId = forOthers ? pickedCustomer || customers[0]?.id || '' : ownCustomerId
+
+  const categories = useMemo(
+    () => Object.keys(CATEGORY_LABEL).filter(c => products.some(p => p.category === c)),
+    [products],
+  )
 
   const availOf = (id: string) => stock[id] ?? 0
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return PRODUCTS.filter(
+    return products.filter(
       p =>
         (category === 'todas' || p.category === category) &&
         (!q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q)),
     )
-  }, [query, category])
+  }, [products, query, category])
 
   const lines = Object.entries(qty)
-    .filter(([, n]) => n > 0)
+    .filter(([id, n]) => n > 0 && productById.has(id))
     .map(([id, requested]) => {
-      const product = PRODUCT_BY_ID.get(id)!
+      const product = productById.get(id)!
       const available = availOf(id)
       const confirmed = Math.min(requested, available)
       return { product, requested, confirmed, missing: requested - confirmed }
@@ -71,7 +70,7 @@ export default function NewOrder({
   const similarTo = (product: Product): Product | null => {
     const utility = (n: string) => /COAT|PRIMER|BASE|CLEANER|REMOVER|LIMA|M[AÁ]QUINA/i.test(n)
     let best: Product | null = null
-    for (const p of PRODUCTS) {
+    for (const p of products) {
       if (p.id === product.id || p.category !== product.category || availOf(p.id) < 1) continue
       if (utility(p.name) !== utility(product.name)) continue
       if (!best || Math.abs(p.price - product.price) < Math.abs(best.price - product.price)) best = p
@@ -79,13 +78,19 @@ export default function NewOrder({
     return best
   }
 
-  const submit = (onShortage: 'partial' | 'reject') => {
+  const flashError = (message: string) => {
+    setToast({ message, kind: 'error' })
+    setTimeout(() => setToast(null), 4500)
+  }
+
+  const submit = async (onShortage: 'partial' | 'reject') => {
+    if (busy) return // evita el doble envío por doble clic
+    setBusy(true)
     try {
-      const res = placeOrder({
+      const res = await placeOrder({
         customerId,
         channel: forOthers ? 'app' : 'web',
         onShortage,
-        by: userName,
         items: lines.map(l => ({ productId: l.product.id, quantity: l.requested })),
       })
       setResult(res)
@@ -94,17 +99,15 @@ export default function NewOrder({
       setCartOpen(false)
     } catch (e) {
       setShortageOpen(false)
-      setToast({
-        message: e instanceof StoreError ? e.message : 'No se pudo enviar el pedido.',
-        kind: 'error',
-      })
-      setTimeout(() => setToast(null), 4000)
+      flashError(e instanceof StoreError ? e.message : 'No se pudo enviar el pedido.')
+    } finally {
+      setBusy(false)
     }
   }
 
-  const confirm = () => (shortages.length > 0 ? setShortageOpen(true) : submit('reject'))
+  const confirm = () => (shortages.length > 0 ? setShortageOpen(true) : void submit('reject'))
 
-  if (result) return <OrderSent result={result} onNew={() => setResult(null)} />
+  if (result) return <OrderSent result={result} productById={productById} onNew={() => setResult(null)} />
 
   const cart = (
     <CartPanel
@@ -112,10 +115,13 @@ export default function NewOrder({
       total={total}
       totalUnits={totalUnits}
       forOthers={forOthers}
+      customers={customers}
+      customerById={customerById}
       customerId={customerId}
-      onCustomer={setCustomerId}
+      onCustomer={setPickedCustomer}
       onRemove={id => setLine(id, 0)}
       onConfirm={confirm}
+      busy={busy}
     />
   )
 
@@ -127,10 +133,10 @@ export default function NewOrder({
         actions={
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink">
             <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-ok opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-ok" />
+              {live && <span className="absolute inline-flex size-full animate-ping rounded-full bg-ok opacity-60" />}
+              <span className={cx('relative inline-flex size-2 rounded-full', live ? 'bg-ok' : 'bg-warn')} />
             </span>
-            Stock en vivo
+            {live ? 'Stock en vivo' : 'Sin conexión en vivo'}
           </span>
         }
       />
@@ -150,7 +156,7 @@ export default function NewOrder({
           </div>
 
           <div className="-mx-4 mb-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0" role="tablist" aria-label="Categorías">
-            {['todas', ...CATEGORIES].map(c => (
+            {['todas', ...categories].map(c => (
               <button
                 key={c}
                 role="tab"
@@ -168,7 +174,10 @@ export default function NewOrder({
 
           <Card>
             {visible.length === 0 ? (
-              <EmptyState title="Sin resultados" hint="Prueba con otro nombre, SKU o categoría." />
+              <EmptyState
+                title={products.length === 0 ? 'Todavía no hay productos' : 'Sin resultados'}
+                hint={products.length === 0 ? 'Carga el catálogo con: npm run seed:catalog' : 'Prueba con otro nombre, SKU o categoría.'}
+              />
             ) : (
               <ul className="divide-y divide-line">
                 {visible.map(p => (
@@ -216,11 +225,11 @@ export default function NewOrder({
         title="No alcanza el stock para todo"
         footer={
           <>
-            <button className={btn.secondary} onClick={() => setShortageOpen(false)}>
+            <button className={btn.secondary} onClick={() => setShortageOpen(false)} disabled={busy}>
               Ajustar cantidades
             </button>
-            <button className={btn.primary} onClick={() => submit('partial')}>
-              {nothingAvailable ? 'Registrar como pendiente' : 'Confirmar con lo disponible'}
+            <button className={btn.primary} onClick={() => void submit('partial')} disabled={busy}>
+              {busy ? 'Enviando…' : nothingAvailable ? 'Registrar como pendiente' : 'Confirmar con lo disponible'}
             </button>
           </>
         }
@@ -347,21 +356,27 @@ function CartPanel({
   total,
   totalUnits,
   forOthers,
+  customers,
+  customerById,
   customerId,
   onCustomer,
   onRemove,
   onConfirm,
+  busy,
 }: {
   lines: { product: Product; requested: number; confirmed: number; missing: number }[]
   total: number
   totalUnits: number
   forOthers: boolean
+  customers: Customer[]
+  customerById: ReadonlyMap<string, Customer>
   customerId: string
   onCustomer: (id: string) => void
   onRemove: (id: string) => void
   onConfirm: () => void
+  busy: boolean
 }) {
-  const customer = CUSTOMER_BY_ID.get(customerId)!
+  const customer = customerById.get(customerId)
   return (
     <Card className="p-4">
       <h2 className="mb-3 text-sm font-semibold text-ink">Resumen del pedido</h2>
@@ -372,18 +387,25 @@ function CartPanel({
         </label>
         {forOthers ? (
           <select id="customer" value={customerId} onChange={e => onCustomer(e.target.value)} className={inputCls}>
-            {CUSTOMERS.map(c => (
+            {customers.map(c => (
               <option key={c.id} value={c.id}>
-                {c.name} · {c.city}
+                {c.name}
+                {c.city ? ` · ${c.city}` : ''}
               </option>
             ))}
           </select>
         ) : (
-          <p className="text-sm text-ink">{customer.name}</p>
+          <p className="text-sm text-ink">{customer?.name ?? '—'}</p>
         )}
-        <p className="mt-1 text-xs text-muted">
-          {customer.document} · {customer.type === 'mayorista' ? 'Mayorista' : 'Detal'}
-        </p>
+        {customer ? (
+          <p className="mt-1 text-xs text-muted">
+            {[customer.document, customer.type === 'mayorista' ? 'Mayorista' : 'Detal'].filter(Boolean).join(' · ')}
+          </p>
+        ) : (
+          <p role="alert" className="mt-1 text-xs text-bad">
+            {forOthers ? 'Todavía no hay clientes registrados.' : 'Tu cuenta no tiene una ficha de cliente. Contacta al administrador.'}
+          </p>
+        )}
       </div>
 
       {lines.length === 0 ? (
@@ -423,15 +445,23 @@ function CartPanel({
         </div>
       </dl>
 
-      <button onClick={onConfirm} disabled={lines.length === 0} className={cx(btn.primary, 'mt-4 w-full')}>
-        Confirmar pedido
+      <button onClick={onConfirm} disabled={lines.length === 0 || !customer || busy} className={cx(btn.primary, 'mt-4 w-full')}>
+        {busy ? 'Enviando…' : 'Confirmar pedido'}
       </button>
       <p className="mt-2 text-center text-xs text-muted">Se envía a bodega al instante.</p>
     </Card>
   )
 }
 
-function OrderSent({ result, onNew }: { result: PlaceOrderResult; onNew: () => void }) {
+function OrderSent({
+  result,
+  productById,
+  onNew,
+}: {
+  result: PlaceOrderResult
+  productById: ReadonlyMap<string, Product>
+  onNew: () => void
+}) {
   const { order, lines } = result
   const cancelled = order.status === 'cancelado'
   return (
@@ -458,7 +488,7 @@ function OrderSent({ result, onNew }: { result: PlaceOrderResult; onNew: () => v
         <ul className="divide-y divide-line rounded-md border border-line">
           {lines.map(l => (
             <li key={l.productId} className="flex items-center justify-between gap-3 p-3 text-sm">
-              <span className="min-w-0 flex-1 text-ink">{PRODUCT_BY_ID.get(l.productId)!.name}</span>
+              <span className="min-w-0 flex-1 text-ink">{productById.get(l.productId)?.name ?? 'Producto'}</span>
               <span className="shrink-0 text-right tnum text-muted">
                 {l.confirmed} de {l.requested}
                 {l.missing > 0 && <span className="block font-semibold text-bad">{l.missing} pendientes</span>}

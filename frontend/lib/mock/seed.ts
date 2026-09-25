@@ -28,8 +28,6 @@ const BY_SKU = new Map(PRODUCTS.map(p => [p.sku, p]))
 // Producto del caso estrella de la demo: "piden 50 y quedan 35"
 export const ROSE_GOLD = BY_SKU.get('QRGPRG0015')!
 
-/** Umbrales del semáforo de disponibilidad. */
-export const LOW_STOCK = 15
 
 function hash(s: string): number {
   let h = 2166136261

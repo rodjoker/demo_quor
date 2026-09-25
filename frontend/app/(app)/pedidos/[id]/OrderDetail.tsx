@@ -5,10 +5,11 @@ import { useState } from 'react'
 import { ArrowLeft, MessageCircle } from 'lucide-react'
 import { Card, Modal, OrderStatusBadge, ProductThumb, Toast, btn, cx, inputCls } from '@/components/ui'
 import { formatCOP, formatDateTime, formatOrderNumber } from '@/lib/format'
-import { CUSTOMER_BY_ID, PRODUCT_BY_ID } from '@/lib/mock/seed'
-import { StoreError, nextStatuses, setOrderStatus, useStore } from '@/lib/mock/store'
+import { useStore } from '@/lib/data/context'
+import { StoreError } from '@/lib/data/types'
+import { nextStatuses } from '@/lib/order-flow'
 import { can } from '@/lib/roles'
-import type { OrderStatus, Role } from '@/lib/types'
+import type { Customer, OrderStatus, Product, Role } from '@/lib/types'
 
 const ACTION: Record<OrderStatus, { label: string; primary?: boolean }> = {
   recibido: { label: 'Recibido' },
@@ -19,18 +20,9 @@ const ACTION: Record<OrderStatus, { label: string; primary?: boolean }> = {
   cancelado: { label: 'Cancelar pedido' },
 }
 
-export default function OrderDetail({
-  id,
-  role,
-  userName,
-  ownCustomerId,
-}: {
-  id: string
-  role: Role
-  userName: string
-  ownCustomerId: string
-}) {
-  const { orders } = useStore()
+export default function OrderDetail({ id, role, ownCustomerId }: { id: string; role: Role; ownCustomerId: string }) {
+  const { orders, customerById, productById, setOrderStatus } = useStore()
+  const [busy, setBusy] = useState(false)
   const order = orders.find(o => o.id === id)
   const [cancelOpen, setCancelOpen] = useState(false)
   const [reason, setReason] = useState('')
@@ -52,7 +44,12 @@ export default function OrderDetail({
     )
   }
 
-  const customer = CUSTOMER_BY_ID.get(order.customerId)!
+  // Si el cliente o un producto ya no son visibles (p. ej. producto desactivado), se muestra un marcador
+  const customer: Customer = customerById.get(order.customerId) ?? {
+    id: order.customerId, name: 'Cliente', document: '', city: '', phone: '', type: 'detal',
+  }
+  const productOf = (productId: string, unitPrice: number): Product =>
+    productById.get(productId) ?? { id: productId, sku: '—', name: 'Producto no disponible', category: '', price: unitPrice, image: null }
   const number = formatOrderNumber(order.number)
   const pending = order.items.filter(i => i.requested > i.confirmed)
 
@@ -62,12 +59,16 @@ export default function OrderDetail({
     return role === 'bodega' && (s === 'preparando' || s === 'despachado')
   })
 
-  const change = (to: OrderStatus, why?: string) => {
+  const change = async (to: OrderStatus, why?: string) => {
+    if (busy) return // evita el doble clic
+    setBusy(true)
     try {
-      setOrderStatus(order.id, to, role, userName, why)
+      await setOrderStatus(order.id, to, why)
       flash(to === 'cancelado' ? 'Pedido cancelado. El stock volvió al inventario.' : `Pedido ${ACTION[to].label.toLowerCase()}.`)
     } catch (e) {
       flash(e instanceof StoreError ? e.message : 'No se pudo cambiar el estado.', 'error')
+    } finally {
+      setBusy(false)
     }
   }
 
@@ -97,12 +98,12 @@ export default function OrderDetail({
             {actions
               .filter(s => s !== 'cancelado')
               .map(s => (
-                <button key={s} className={ACTION[s].primary ? btn.primary : btn.secondary} onClick={() => change(s)}>
+                <button key={s} className={ACTION[s].primary ? btn.primary : btn.secondary} disabled={busy} onClick={() => void change(s)}>
                   {ACTION[s].label}
                 </button>
               ))}
             {actions.includes('cancelado') && (
-              <button className={btn.danger} onClick={() => setCancelOpen(true)}>
+              <button className={btn.danger} disabled={busy} onClick={() => setCancelOpen(true)}>
                 Cancelar pedido
               </button>
             )}
@@ -123,7 +124,7 @@ export default function OrderDetail({
             <h2 className="border-b border-line px-4 py-3 text-sm font-semibold text-ink">Productos</h2>
             <ul className="divide-y divide-line">
               {order.items.map(it => {
-                const p = PRODUCT_BY_ID.get(it.productId)!
+                const p = productOf(it.productId, it.unitPrice)
                 const missing = it.requested - it.confirmed
                 return (
                   <li key={it.productId} className="flex items-center gap-3 p-4">
@@ -203,9 +204,10 @@ export default function OrderDetail({
             </button>
             <button
               className={btn.danger}
-              onClick={() => {
-                change('cancelado', reason.trim() || undefined)
+              disabled={busy}
+              onClick={async () => {
                 setCancelOpen(false)
+                await change('cancelado', reason.trim() || undefined)
                 setReason('')
               }}
             >

@@ -1,13 +1,14 @@
-// Almacén en memoria que reemplaza a Supabase mientras se crea la base de datos.
+// Almacén en memoria del MODO DEMO (cuando no hay Supabase configurado).
 // Replica las reglas de las funciones SQL (place_order, set_order_status, adjust_stock):
 //  - el stock baja al instante y nunca queda negativo,
 //  - una compra parcial registra la demanda no atendida,
 //  - cancelar devuelve el stock una sola vez,
 //  - cada cambio deja un movimiento y un evento.
-// Al conectar Supabase se cambia este archivo por llamadas a supabase.rpc(...) y Realtime;
-// las pantallas no deberían necesitar cambios.
+// Con Supabase configurado no se usa: ver lib/data/supabase-provider.tsx.
 import { useSyncExternalStore } from 'react'
 import { buildSeed, PRODUCT_BY_ID, type SeedState } from './seed'
+import { StoreError, type PlaceOrderResult } from '../data/types'
+import { TRANSITIONS } from '../order-flow'
 import type { Channel, Order, OrderItem, OrderStatus, Role } from '../types'
 
 export type State = SeedState
@@ -28,18 +29,12 @@ function subscribe(cb: () => void) {
   }
 }
 
-/** Estado completo; se actualiza solo en todas las pantallas que lo usan. */
-export function useStore(): State {
+/** Estado en memoria del modo demo (lo consume lib/data/demo-provider.tsx). */
+export function useMockStore(): State {
   return useSyncExternalStore(subscribe, () => state, () => INITIAL)
 }
 
-export class StoreError extends Error {
-  constructor(public code: string, message: string) {
-    super(message)
-  }
-}
-
-export interface PlaceOrderInput {
+export interface MockPlaceOrderInput {
   customerId: string
   items: { productId: string; quantity: number }[]
   channel: Channel
@@ -47,15 +42,10 @@ export interface PlaceOrderInput {
   by: string
 }
 
-export interface PlaceOrderResult {
-  order: Order
-  lines: { productId: string; requested: number; confirmed: number; missing: number }[]
-}
-
 let counter = 0
 const uid = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${(counter++).toString(36)}`
 
-export function placeOrder(input: PlaceOrderInput): PlaceOrderResult {
+export function placeOrder(input: MockPlaceOrderInput): PlaceOrderResult {
   if (input.items.length === 0) throw new StoreError('invalid_items', 'El pedido está vacío.')
 
   // Agrupa líneas repetidas y valida
@@ -120,17 +110,6 @@ export function placeOrder(input: PlaceOrderInput): PlaceOrderResult {
   commit({ ...state, stock, orders: [order, ...state.orders], unmet, movements, nextNumber: number + 1 })
   return { order, lines }
 }
-
-const TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
-  recibido: ['en_revision', 'preparando', 'cancelado'],
-  en_revision: ['aprobado', 'cancelado'],
-  aprobado: ['preparando', 'cancelado'],
-  preparando: ['despachado', 'cancelado'],
-  despachado: [],
-  cancelado: [],
-}
-
-export const nextStatuses = (s: OrderStatus) => TRANSITIONS[s]
 
 export function setOrderStatus(orderId: string, to: OrderStatus, role: Role, by: string, reason?: string) {
   const order = state.orders.find(o => o.id === orderId)

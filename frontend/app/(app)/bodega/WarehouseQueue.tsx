@@ -5,12 +5,13 @@ import { useState } from 'react'
 import { Clock, PackageCheck, Truck } from 'lucide-react'
 import { Card, EmptyState, PageHeader, Toast, btn, cx } from '@/components/ui'
 import { formatDateTime, formatOrderNumber } from '@/lib/format'
-import { CUSTOMER_BY_ID, PRODUCT_BY_ID } from '@/lib/mock/seed'
-import { StoreError, setOrderStatus, useStore } from '@/lib/mock/store'
-import type { Order, Role } from '@/lib/types'
+import { useStore } from '@/lib/data/context'
+import { StoreError } from '@/lib/data/types'
+import type { Order } from '@/lib/types'
 
-export default function WarehouseQueue({ role, userName }: { role: Role; userName: string }) {
-  const { orders } = useStore()
+export default function WarehouseQueue() {
+  const { orders, setOrderStatus } = useStore()
+  const [busyId, setBusyId] = useState<string | null>(null)
   const [picked, setPicked] = useState<Record<string, boolean>>({})
   const [toast, setToast] = useState<{ message: string; kind: 'ok' | 'error' } | null>(null)
 
@@ -25,12 +26,16 @@ export default function WarehouseQueue({ role, userName }: { role: Role; userNam
   const preparing = orders.filter(o => o.status === 'preparando').sort(oldestFirst)
   const dispatched = orders.filter(o => o.status === 'despachado')
 
-  const move = (o: Order, to: 'preparando' | 'despachado') => {
+  const move = async (o: Order, to: 'preparando' | 'despachado') => {
+    if (busyId) return // una acción a la vez
+    setBusyId(o.id)
     try {
-      setOrderStatus(o.id, to, role, userName)
+      await setOrderStatus(o.id, to)
       flash(to === 'preparando' ? `${formatOrderNumber(o.number)} en preparación.` : `${formatOrderNumber(o.number)} despachado.`)
     } catch (e) {
       flash(e instanceof StoreError ? e.message : 'No se pudo actualizar.', 'error')
+    } finally {
+      setBusyId(null)
     }
   }
 
@@ -64,7 +69,7 @@ export default function WarehouseQueue({ role, userName }: { role: Role; userNam
             )}
             {toPrepare.map(o => (
               <OrderCard key={o.id} order={o}>
-                <button className={cx(btn.primary, 'w-full')} onClick={() => move(o, 'preparando')}>
+                <button className={cx(btn.primary, 'w-full')} disabled={busyId === o.id} onClick={() => void move(o, 'preparando')}>
                   <PackageCheck className="size-4" aria-hidden /> Empezar a preparar
                 </button>
               </OrderCard>
@@ -94,8 +99,8 @@ export default function WarehouseQueue({ role, userName }: { role: Role; userNam
               >
                 <button
                   className={cx(btn.primary, 'w-full')}
-                  disabled={!allPicked(o)}
-                  onClick={() => move(o, 'despachado')}
+                  disabled={!allPicked(o) || busyId === o.id}
+                  onClick={() => void move(o, 'despachado')}
                 >
                   <Truck className="size-4" aria-hidden />
                   {allPicked(o) ? 'Marcar despachado' : 'Marca cada producto para despachar'}
@@ -120,7 +125,8 @@ function OrderCard({
   children: React.ReactNode
   pick?: { isPicked: (productId: string) => boolean; toggle: (productId: string) => void }
 }) {
-  const c = CUSTOMER_BY_ID.get(order.customerId)!
+  const { customerById, productById } = useStore()
+  const c = customerById.get(order.customerId) ?? { name: 'Cliente', city: '' }
   const items = order.items.filter(i => i.confirmed > 0)
   const units = items.reduce((s, i) => s + i.confirmed, 0)
 
@@ -141,7 +147,7 @@ function OrderCard({
 
       <ul className="divide-y divide-line">
         {items.map(it => {
-          const p = PRODUCT_BY_ID.get(it.productId)!
+          const p = productById.get(it.productId) ?? { name: 'Producto no disponible', sku: '—' }
           const checked = pick?.isPicked(it.productId) ?? false
           const inner = (
             <>

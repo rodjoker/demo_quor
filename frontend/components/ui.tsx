@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { X } from 'lucide-react'
-import { LOW_STOCK } from '@/lib/mock/seed'
+import { LOW_STOCK } from '@/lib/constants'
 import type { OrderStatus, Product } from '@/lib/types'
 
 export const cx = (...parts: (string | false | null | undefined)[]) => parts.filter(Boolean).join(' ')

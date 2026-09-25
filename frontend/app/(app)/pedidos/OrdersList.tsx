@@ -6,15 +6,14 @@ import { useState } from 'react'
 import { ChevronRight, Plus, Search } from 'lucide-react'
 import { Card, EmptyState, OrderStatusBadge, PageHeader, STATUS_LABEL, btn, cx, inputCls } from '@/components/ui'
 import { formatCOP, formatDateTime, formatOrderNumber } from '@/lib/format'
-import { CUSTOMER_BY_ID } from '@/lib/mock/seed'
-import { useStore } from '@/lib/mock/store'
+import { useStore } from '@/lib/data/context'
 import { can } from '@/lib/roles'
 import type { OrderStatus, Role } from '@/lib/types'
 
 const STATUSES: OrderStatus[] = ['recibido', 'en_revision', 'aprobado', 'preparando', 'despachado', 'cancelado']
 
 export default function OrdersList({ role, ownCustomerId }: { role: Role; ownCustomerId: string }) {
-  const { orders } = useStore()
+  const { orders, customerById } = useStore()
   const router = useRouter()
   const [status, setStatus] = useState<OrderStatus | 'todos'>('todos')
   const [query, setQuery] = useState('')
@@ -24,7 +23,7 @@ export default function OrdersList({ role, ownCustomerId }: { role: Role; ownCus
   const shown = mine.filter(o => {
     if (status !== 'todos' && o.status !== status) return false
     if (!q) return true
-    const c = CUSTOMER_BY_ID.get(o.customerId)
+    const c = customerById.get(o.customerId)
     return formatOrderNumber(o.number).toLowerCase().includes(q) || (c?.name.toLowerCase().includes(q) ?? false)
   })
   const count = (s: OrderStatus) => mine.filter(o => o.status === s).length
@@ -83,7 +82,7 @@ export default function OrdersList({ role, ownCustomerId }: { role: Role; ownCus
               </thead>
               <tbody className="divide-y divide-line">
                 {shown.map(o => {
-                  const c = CUSTOMER_BY_ID.get(o.customerId)
+                  const c = customerById.get(o.customerId)
                   const units = o.items.reduce((s, i) => s + i.confirmed, 0)
                   const short = o.items.some(i => i.requested > i.confirmed)
                   return (
@@ -119,7 +118,7 @@ export default function OrdersList({ role, ownCustomerId }: { role: Role; ownCus
             {/* Móvil: tarjetas */}
             <ul className="divide-y divide-line md:hidden">
               {shown.map(o => {
-                const c = CUSTOMER_BY_ID.get(o.customerId)
+                const c = customerById.get(o.customerId)
                 const units = o.items.reduce((s, i) => s + i.confirmed, 0)
                 const short = o.items.some(i => i.requested > i.confirmed)
                 return (

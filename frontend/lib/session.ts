@@ -10,6 +10,8 @@ export interface Session {
   name: string
   role: Role
   demo: boolean
+  /** Ficha de cliente de esta persona (la crea el registro). En modo demo, un cliente de ejemplo. */
+  customerId: string | null
 }
 
 export const DEMO_ROLE_COOKIE = 'demo_role'
@@ -29,7 +31,7 @@ export async function getSession(): Promise<Session | null> {
     const store = await cookies()
     const raw = store.get(DEMO_ROLE_COOKIE)?.value
     const role: Role = isRole(raw) ? raw : 'admin'
-    return { userId: `demo-${role}`, role, demo: true, ...DEMO_USERS[role] }
+    return { userId: `demo-${role}`, role, demo: true, customerId: DEMO_CUSTOMER_ID, ...DEMO_USERS[role] }
   }
 
   const supabase = await createClient()
@@ -42,11 +44,18 @@ export async function getSession(): Promise<Session | null> {
     .eq('id', user.id)
     .single()
 
+  const { data: customer } = await supabase
+    .from('customers')
+    .select('id')
+    .eq('profile_id', user.id)
+    .maybeSingle()
+
   return {
     userId: user.id,
     email: profile?.email ?? user.email ?? '',
     name: profile?.full_name ?? profile?.email ?? user.email ?? '',
     role: isRole(profile?.role) ? profile.role : 'cliente',
     demo: false,
+    customerId: customer?.id ?? null,
   }
 }

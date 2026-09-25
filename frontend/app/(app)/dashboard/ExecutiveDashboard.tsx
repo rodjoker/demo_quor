@@ -5,8 +5,7 @@ import { useMemo } from 'react'
 import { RefreshCw, TrendingDown } from 'lucide-react'
 import { Card, PageHeader, StockBadge, cx } from '@/components/ui'
 import { dayOf, formatCOP, formatDay } from '@/lib/format'
-import { PRODUCTS, PRODUCT_BY_ID } from '@/lib/mock/seed'
-import { useStore } from '@/lib/mock/store'
+import { useStore } from '@/lib/data/context'
 
 const compact = new Intl.NumberFormat('es-CO', { notation: 'compact', maximumFractionDigits: 1 })
 
@@ -17,7 +16,7 @@ function lastDays(endKey: string, n: number): string[] {
 }
 
 export default function ExecutiveDashboard() {
-  const { orders, unmet, stock } = useStore()
+  const { orders, unmet, stock, products: PRODUCTS, productById: PRODUCT_BY_ID, live } = useStore()
 
   const m = useMemo(() => {
     const live = orders.filter(o => o.status !== 'cancelado')
@@ -60,7 +59,7 @@ export default function ExecutiveDashboard() {
       out,
       low,
     }
-  }, [orders, unmet, stock])
+  }, [orders, unmet, stock, PRODUCTS])
 
   const maxDay = Math.max(1, ...m.perDay.map(d => d.total))
   const maxTop = Math.max(1, ...m.top.map(([, n]) => n))
@@ -73,7 +72,7 @@ export default function ExecutiveDashboard() {
         subtitle="Últimos 7 días. Datos de demostración, salvo el catálogo."
         actions={
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink">
-            <RefreshCw className="size-3.5 text-ok" aria-hidden /> Matrix (simulada): sincronizada
+            <RefreshCw className={cx('size-3.5', live ? 'text-ok' : 'text-warn')} aria-hidden /> {live ? 'Datos en vivo' : 'Sin conexión en vivo'}
           </span>
         }
       />
@@ -122,7 +121,7 @@ export default function ExecutiveDashboard() {
               {m.lostList.slice(0, 5).map(([id, v]) => (
                 <li key={id}>
                   <div className="flex items-baseline justify-between gap-3 text-sm">
-                    <span className="min-w-0 truncate text-ink">{PRODUCT_BY_ID.get(id)!.name}</span>
+                    <span className="min-w-0 truncate text-ink">{PRODUCT_BY_ID.get(id)?.name ?? 'Producto'}</span>
                     <span className="shrink-0 font-medium text-bad tnum">{v.units} uds.</span>
                   </div>
                   <div className="mt-1 h-1.5 rounded-full bg-canvas">
@@ -143,7 +142,7 @@ export default function ExecutiveDashboard() {
             {m.top.map(([id, n]) => (
               <li key={id}>
                 <div className="flex items-baseline justify-between gap-3 text-sm">
-                  <span className="min-w-0 truncate text-ink">{PRODUCT_BY_ID.get(id)!.name}</span>
+                  <span className="min-w-0 truncate text-ink">{PRODUCT_BY_ID.get(id)?.name ?? 'Producto'}</span>
                   <span className="shrink-0 font-medium text-ink tnum">{n} uds.</span>
                 </div>
                 <div className="mt-1 h-1.5 rounded-full bg-canvas">
