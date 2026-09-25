@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { getSession } from '@/lib/session'
+import { ROLE_HOME } from '@/lib/roles'
 
+// Cada rol aterriza en su pantalla de trabajo.
 export default async function Home() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  redirect(user ? '/dashboard' : '/login')
+  const session = await getSession()
+  redirect(session ? ROLE_HOME[session.role] : '/login')
 }

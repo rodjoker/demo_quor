@@ -1,0 +1,782 @@
+[
+ {
+  "id": 2308,
+  "sku": "QRET120001",
+  "name": "01 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/01-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/01-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2311,
+  "sku": "QRET120004",
+  "name": "04 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/04-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/04-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2356,
+  "sku": "QRGL202405",
+  "name": "05 GLITTER QUOR/ESCARCHA DECORATIVA PARA UÑAS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/05-GLITTER-QUOR_ESCARCHA-DECORATIVA-PARA-UNAS-300x300.webp",
+  "url": "https://quorproducts.co/producto/05-glitter-quor-escarcha-decorativa-para-unas/",
+  "instock": true
+ },
+ {
+  "id": 2357,
+  "sku": "QRGL202407",
+  "name": "07 GLITTER QUOR/ESCARCHA DECORATIVA PARA UÑAS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/07-GLITTER-QUOR_ESCARCHA-DECORATIVA-PARA-UNAS-300x300.webp",
+  "url": "https://quorproducts.co/producto/07-glitter-quor-escarcha-decorativa-para-unas/",
+  "instock": true
+ },
+ {
+  "id": 2361,
+  "sku": "QREP202408-6",
+  "name": "08-06 QUOR EFECTOS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/08-06-QUOR-EFECTOS-300x300.webp",
+  "url": "https://quorproducts.co/producto/08-06-quor-efectos/",
+  "instock": true
+ },
+ {
+  "id": 2364,
+  "sku": "QREP202412",
+  "name": "12 QUOR EFECTOS",
+  "category": "efectos-en-polvo",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/08/27-QUOR-EFECTOS-300x300.webp",
+  "url": "https://quorproducts.co/producto/12-quor-efectos/",
+  "instock": true
+ },
+ {
+  "id": 2316,
+  "sku": "QRET120012",
+  "name": "12 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/12-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/12-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2362,
+  "sku": "QREP202413-1",
+  "name": "13 QUOR EFECTOS",
+  "category": "efectos-en-polvo",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/13-QUOR-EFECTOS-300x300.webp",
+  "url": "https://quorproducts.co/producto/13-quor-efectos/",
+  "instock": true
+ },
+ {
+  "id": 2304,
+  "sku": "QRET120016",
+  "name": "16 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/16-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/16-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2302,
+  "sku": "QRET120018",
+  "name": "18 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/18-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/18-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2310,
+  "sku": "QRET120022",
+  "name": "22 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/22-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/22-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2363,
+  "sku": "QREP202422-6",
+  "name": "22-06 QUOR EFECTOS",
+  "category": "efectos-en-polvo",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/22-06-QUOR-EFECTOS-300x300.webp",
+  "url": "https://quorproducts.co/producto/22-06-quor-efectos/",
+  "instock": true
+ },
+ {
+  "id": 2306,
+  "sku": "QRET120025",
+  "name": "25 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/25-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/25-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2365,
+  "sku": "QREP202427",
+  "name": "27 QUOR EFECTOS",
+  "category": "efectos-en-polvo",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/08/27-QUOR-EFECTOS-300x300.webp",
+  "url": "https://quorproducts.co/producto/27-quor-efectos/",
+  "instock": true
+ },
+ {
+  "id": 2307,
+  "sku": "QRET120050",
+  "name": "50 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/50-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/50-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2314,
+  "sku": "QRET120053",
+  "name": "53 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/53-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/53-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2313,
+  "sku": "QRET120062",
+  "name": "62 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/62-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/62-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2312,
+  "sku": "QRET120065",
+  "name": "65 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/65-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/65-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2358,
+  "sku": "QRGL202467",
+  "name": "67 GLITTER QUOR/ESCARCHA DECORATIVA PARA UÑAS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/67-GLITTER-QUOR_ESCARCHA-DECORATIVA-PARA-UNAS-300x300.webp",
+  "url": "https://quorproducts.co/producto/67-glitter-quor-escarcha-decorativa-para-unas/",
+  "instock": true
+ },
+ {
+  "id": 2303,
+  "sku": "QRET120068",
+  "name": "68 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/68-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/68-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2359,
+  "sku": "QRGL202469",
+  "name": "69 GLITTER QUOR/ESCARCHA DECORATIVA PARA UÑAS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/69-GLITTER-QUOR_ESCARCHA-DECORATIVA-PARA-UNAS-300x300.webp",
+  "url": "https://quorproducts.co/producto/69-glitter-quor-escarcha-decorativa-para-unas/",
+  "instock": true
+ },
+ {
+  "id": 2305,
+  "sku": "QRET120072",
+  "name": "72 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/72-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/72-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2315,
+  "sku": "QRET120078",
+  "name": "78 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/78-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/78-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2309,
+  "sku": "QRET120087",
+  "name": "87 QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 7500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/87-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/87-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2360,
+  "sku": "QRGL202495",
+  "name": "95 GLITTER QUOR/ESCARCHA DECORATIVA PARA UÑAS",
+  "category": "glitters",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/95-GLITTER-QUOR_ESCARCHA-DECORATIVA-PARA-UNAS-300x300.webp",
+  "url": "https://quorproducts.co/producto/95-glitter-quor-escarcha-decorativa-para-unas/",
+  "instock": true
+ },
+ {
+  "id": 2351,
+  "sku": "QRACCO2615",
+  "name": "ACRILICO NICOLE COVER 1.5 OZ",
+  "category": "acrilicos",
+  "price": 30000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/ACRILICO-NICOLE-COVER-1.5-OZ-300x300.webp",
+  "url": "https://quorproducts.co/producto/acrilico-nicole-cover-1-5-oz/",
+  "instock": true
+ },
+ {
+  "id": 2352,
+  "sku": "QRACCO2115",
+  "name": "ACRILICO NUDE GLOW COVER 1.5OZ",
+  "category": "acrilicos",
+  "price": 30000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/ACRILICO-NUDE-GLOW-COVER-1.5OZ-300x300.webp",
+  "url": "https://quorproducts.co/producto/acrilico-nude-glow-cover-1-5oz/",
+  "instock": true
+ },
+ {
+  "id": 2354,
+  "sku": "QRACCO1715",
+  "name": "ACRILICO PINK GLOW COVER 1.5 OZ",
+  "category": "acrilicos",
+  "price": 30000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/ACRILICO-PINK-GLOW-COVER-1.5-OZ-300x300.webp",
+  "url": "https://quorproducts.co/producto/acrilico-pink-glow-cover-1-5-oz/",
+  "instock": true
+ },
+ {
+  "id": 2353,
+  "sku": "QRACCO1815",
+  "name": "ACRILICO PINK SWEET COVER 1.5OZ",
+  "category": "acrilicos",
+  "price": 30000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/ACRILICO-PINK-SWEET-COVER-1.5OZ-300x300.webp",
+  "url": "https://quorproducts.co/producto/acrilico-pink-sweet-cover-1-5oz/",
+  "instock": true
+ },
+ {
+  "id": 2355,
+  "sku": "QRACCO1215",
+  "name": "ACRILICO WHITE 1.5 OZ",
+  "category": "acrilicos",
+  "price": 30000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/ACRILICO-WHITE-1.5-OZ-300x300.webp",
+  "url": "https://quorproducts.co/producto/acrilico-white-1-5-oz/",
+  "instock": true
+ },
+ {
+  "id": 2317,
+  "sku": "QRET1202BA",
+  "name": "BASE ARGAN QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 10000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/BASE-ARGAN-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/base-argan-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2318,
+  "sku": "QRET1201BA",
+  "name": "BASE FORTALECEDORA QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 8500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/BASE-FORTALECEDORA-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/base-fortalecedora-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2319,
+  "sku": "QRET1202BR",
+  "name": "BRILLO EFECTO GEL QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 9500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/BRILLO-EFECTO-GEL-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/brillo-efecto-gel-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2320,
+  "sku": "QRET1201BR",
+  "name": "BRILLO SECANTE QUOR ESMALTE TRADICIONAL 12ML",
+  "category": "tradicional",
+  "price": 8500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/BRILLO-SECANTE-QUOR-ESMALTE-TRADICIONAL-12ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/brillo-secante-quor-esmalte-tradicional-12ml/",
+  "instock": true
+ },
+ {
+  "id": 2292,
+  "sku": "QRBL001AME",
+  "name": "LIPSTICK AME + QUOR 2026",
+  "category": "linea-spa",
+  "price": 24900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/LIPSTICK-AME-QUOR-2026-1-300x300.webp",
+  "url": "https://quorproducts.co/producto/lipstick-ame-quor-2026/",
+  "instock": true
+ },
+ {
+  "id": 2295,
+  "sku": "QRHEAS0006",
+  "name": "QUOR BY: STALEKS EMPUJADOR DE CUTICULA PE-30/1",
+  "category": "herramientas",
+  "price": 50000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-BY_-STALEKS-EMPUJADOR-DE-CUTICULA-PE-30_1-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-by-staleks-empujador-de-cuticula-pe-30-1/",
+  "instock": true
+ },
+ {
+  "id": 2290,
+  "sku": "QREXCC0300",
+  "name": "QUOR EXFOLIANTE CORPORAL CHERRY 300ML",
+  "category": "linea-spa",
+  "price": 24900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-EXFOLIANTE-CORPORAL-CHERRY-300ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-exfoliante-corporal-cherry-300ml/",
+  "instock": true
+ },
+ {
+  "id": 2289,
+  "sku": "QREXCP0300",
+  "name": "QUOR EXFOLIANTE CORPORAL PIÑA 300ML",
+  "category": "linea-spa",
+  "price": 24900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-EXFOLIANTE-CORPORAL-PINA-300ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-exfoliante-corporal-pina-300ml/",
+  "instock": true
+ },
+ {
+  "id": 2288,
+  "sku": "QREXHN1000",
+  "name": "QUOR EXFOLIANTE MANOS 980ML",
+  "category": "linea-spa",
+  "price": 34500,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-EXFOLIANTE-MANOS-980ML-200x300.webp",
+  "url": "https://quorproducts.co/producto/quor-exfoliante-manos-980ml/",
+  "instock": true
+ },
+ {
+  "id": 2322,
+  "sku": "QRGPBOG015",
+  "name": "QUOR GEL POLISH BASE COAT 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-GEL-POLISH-BASE-COAT-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-gel-polish-base-coat-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2349,
+  "sku": "QRGPCTV015",
+  "name": "QUOR GEL POLISH CATTY VELVET 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-GEL-POLISH-CATTY-VELVET-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-gel-polish-catty-velvet-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2293,
+  "sku": "QRELBLUL54",
+  "name": "QUOR MÁQUINA SELLADORA UV GEL POLISH  BLANCA  F4SK",
+  "category": "herramientas",
+  "price": 230000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-MAQUINA-SELLADORA-UV-GEL-POLISH-BLANCA-F4SK-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-maquina-selladora-uv-gel-polish-blanca-f4sk/",
+  "instock": true
+ },
+ {
+  "id": 2294,
+  "sku": "QRELROSUL54",
+  "name": "QUOR MÁQUINA SELLADORA UV GEL POLISH ROSADA F4SK",
+  "category": "herramientas",
+  "price": 230000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-MAQUINA-SELLADORA-UV-GEL-POLISH-ROSADA-F4SK-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-maquina-selladora-uv-gel-polish-rosada-f4sk/",
+  "instock": true
+ },
+ {
+  "id": 2291,
+  "sku": "QRMAFI0300",
+  "name": "QUOR MASCARILLA EFECTO FRIO 300ML",
+  "category": "linea-spa",
+  "price": 24900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-MASCARILLA-EFECTO-FRIO-300ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-mascarilla-efecto-frio-300ml/",
+  "instock": true
+ },
+ {
+  "id": 2296,
+  "sku": "QRLMP0250M",
+  "name": "QUOR MOLDEADOR POLY NAIL GEL 250ML",
+  "category": "polygel",
+  "price": 39900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-MOLDEADOR-POLY-NAIL-GEL-250ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-moldeador-poly-nail-gel-250ml/",
+  "instock": true
+ },
+ {
+  "id": 2297,
+  "sku": "QRPL02ANGEL",
+  "name": "QUOR POLY NAIL GEL ANGEL 60 GR",
+  "category": "polygel",
+  "price": 55000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-POLY-NAIL-GEL-ANGEL-60-GR-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-poly-nail-gel-angel-60-gr/",
+  "instock": true
+ },
+ {
+  "id": 2298,
+  "sku": "QRPL05CHEE",
+  "name": "QUOR POLY NAIL GEL CHEESECAKE 60 GR",
+  "category": "polygel",
+  "price": 55000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-POLY-NAIL-GEL-CHEESECAKE-60-GR-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-poly-nail-gel-cheesecake-60-gr/",
+  "instock": true
+ },
+ {
+  "id": 2299,
+  "sku": "QRPL0CLEAR",
+  "name": "QUOR POLY NAIL GEL CLEAR  60 GR",
+  "category": "polygel",
+  "price": 55000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-POLY-NAIL-GEL-CLEAR-60-GR-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-poly-nail-gel-clear-60-gr/",
+  "instock": true
+ },
+ {
+  "id": 2300,
+  "sku": "QRPL09MIST",
+  "name": "QUOR POLY NAIL GEL MISTICA 60 GR",
+  "category": "polygel",
+  "price": 55000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-POLY-NAIL-GEL-MISTICA-60-GR-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-poly-nail-gel-mistica-60-gr/",
+  "instock": true
+ },
+ {
+  "id": 2301,
+  "sku": "QRPL26NICO",
+  "name": "QUOR POLY NAIL NICOLE 60 GR",
+  "category": "polygel",
+  "price": 55000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-POLY-NAIL-NICOLE-60-GR-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-poly-nail-nicole-60-gr/",
+  "instock": true
+ },
+ {
+  "id": 2339,
+  "sku": "QRGPAF0015",
+  "name": "QUOR UV GEL POLISH ALFAJOR 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ALFAJOR-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-alfajor-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2330,
+  "sku": "QRGPANG0015",
+  "name": "QUOR UV GEL POLISH ANGEL 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ANGEL-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-angel-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2332,
+  "sku": "QRGPBAR015",
+  "name": "QUOR UV GEL POLISH BASE R1 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-BASE-R1-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-base-r1-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2331,
+  "sku": "QRGPRN1015",
+  "name": "QUOR UV GEL POLISH BASE RN1 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-BASE-RN1-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-base-rn1-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2321,
+  "sku": "QRGPLB0015",
+  "name": "QUOR UV GEL POLISH BLANCO #1 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-BLANCO-1-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-blanco-1-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2329,
+  "sku": "QRGPLBB015",
+  "name": "QUOR UV GEL POLISH BLANCO #2 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-BLANCO-2-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-blanco-2-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2338,
+  "sku": "QEGBLU0015",
+  "name": "QUOR UV GEL POLISH BLUSH 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-BLUSH-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-blush-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2345,
+  "sku": "QRGPLIS0168",
+  "name": "QUOR UV GEL POLISH CARAMELO 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-CARAMELO-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-caramelo-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2350,
+  "sku": "QRGPHA0015",
+  "name": "QUOR UV GEL POLISH CHANTILLY 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-CHANTILLY-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-chantilly-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2344,
+  "sku": "QRGPEK0015",
+  "name": "QUOR UV GEL POLISH CHEESECAKE 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-CHEESECAKE-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-cheesecake-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2343,
+  "sku": "QRGPHH0015",
+  "name": "QUOR UV GEL POLISH CHOCOLATE 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-CHOCOLATE-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-chocolate-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2335,
+  "sku": "QRGPTL0015",
+  "name": "QUOR UV GEL POLISH CRISTAL 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-CRISTAL-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-cristal-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2334,
+  "sku": "QRGPOD0015",
+  "name": "QUOR UV GEL POLISH DIAMOND 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-DIAMOND-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-diamond-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2347,
+  "sku": "QRGPEF0015",
+  "name": "QUOR UV GEL POLISH FRESA 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-FRESA-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-fresa-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2342,
+  "sku": "QRGPGLY0015",
+  "name": "QUOR UV GEL POLISH GELLY 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-GELLY-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-gelly-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2337,
+  "sku": "QRGPHD0015",
+  "name": "QUOR UV GEL POLISH HADA 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-HADA-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-hada-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2324,
+  "sku": "QRGPHAW15",
+  "name": "QUOR UV GEL POLISH HAWAI 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-HAWAI-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-hawai-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2346,
+  "sku": "QRGPII0015",
+  "name": "QUOR UV GEL POLISH IRIS 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-IRIS-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-iris-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2348,
+  "sku": "QRGPNP0015",
+  "name": "QUOR UV GEL POLISH NAPOLITANA 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-NAPOLITANA-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-napolitana-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2340,
+  "sku": "QRGPOQ0015",
+  "name": "QUOR UV GEL POLISH ORQUIDEA 15ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ORQUIDEA-15ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-orquidea-15ml/",
+  "instock": true
+ },
+ {
+  "id": 2341,
+  "sku": "QRGPIP0015",
+  "name": "QUOR UV GEL POLISH PISTACHO 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-PISTACHO-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-pistacho-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2325,
+  "sku": "QRGPQRB15",
+  "name": "QUOR UV GEL POLISH QUOR BASIC 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-QUOR-BASIC-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-quor-basic-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2327,
+  "sku": "QRGPFCO0015",
+  "name": "QUOR UV GEL POLISH ROSA FRANK #1 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ROSA-FRANK-1-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-rosa-frank-1-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2328,
+  "sku": "QRGPFU0015",
+  "name": "QUOR UV GEL POLISH ROSA FRANK #2 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ROSA-FRANK-2-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-rosa-frank-2-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2336,
+  "sku": "QRGPRG0015",
+  "name": "QUOR UV GEL POLISH ROSE GOLD 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-ROSE-GOLD-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-rose-gold-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2333,
+  "sku": "QRGPTTN0015",
+  "name": "QUOR UV GEL POLISH TITANIUM 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-TITANIUM-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-titanium-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2323,
+  "sku": "QRGPTOC015",
+  "name": "QUOR UV GEL POLISH TOP COAT #1 15 ML",
+  "category": "gel-polish",
+  "price": 29900,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-TOP-COAT-1-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-top-coat-1-15-ml/",
+  "instock": true
+ },
+ {
+  "id": 2326,
+  "sku": "QRGPVV0015",
+  "name": "QUOR UV GEL POLISH VAINILLA 15 ML",
+  "category": "gel-polish",
+  "price": 25000,
+  "image": "https://quorproducts.co/wp-content/uploads/2026/07/QUOR-UV-GEL-POLISH-VAINILLA-15-ML-300x300.webp",
+  "url": "https://quorproducts.co/producto/quor-uv-gel-polish-vainilla-15-ml/",
+  "instock": true
+ }
+]

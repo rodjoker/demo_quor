@@ -32,7 +32,6 @@ export async function updateProfile(
 
   if (error) return { error: 'No se pudo guardar. Intenta de nuevo.' }
 
-  revalidatePath('/dashboard/profile')
-  revalidatePath('/dashboard')
+  revalidatePath('/perfil')
   return { success: true }
 }

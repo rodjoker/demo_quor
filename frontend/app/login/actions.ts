@@ -57,5 +57,5 @@ export async function login(prevState: LoginState, formData: FormData): Promise<
     .update({ failed_attempts: 0 })
     .eq('email', email)
 
-  redirect('/dashboard')
+  redirect('/')
 }

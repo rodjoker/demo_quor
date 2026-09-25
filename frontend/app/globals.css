@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
+/* Identidad tomada de quorproducts.co, en versión sobria para una app de administración:
+   Poppins, fondo #F8F8F8, botones negros de 5px, y el degradado rosa-celeste-lila solo
+   como acento (línea superior, pantalla de acceso, indicadores). */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --canvas: #f8f8f8;
+  --surface: #ffffff;
+  --ink: #010101;
+  --muted: #666666;
+  --line: #e8e6e7;
+
+  --pink: #fc8dc3;
+  --sky: #8ed2f1;
+  --lilac: #ceb2eb;
+  --pink-soft: #fad5d9;
+  --purple: #9f6ed3;
+  --accent: #e62a65;
+
+  --ok: #1f9d6b;
+  --warn: #d98a00;
+  --bad: #e62a65;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-pink: var(--pink);
+  --color-sky: var(--sky);
+  --color-lilac: var(--lilac);
+  --color-pink-soft: var(--pink-soft);
+  --color-purple: var(--purple);
+  --color-accent: var(--accent);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+.brand-line {
+  background: linear-gradient(90deg, #fc8dc3 0%, #8ed2f1 49%, #ceb2eb 100%);
+}
+
+.brand-wash {
+  background:
+    radial-gradient(60rem 30rem at 0% 0%, rgba(252, 141, 195, 0.28), transparent 60%),
+    radial-gradient(50rem 30rem at 100% 0%, rgba(142, 210, 241, 0.32), transparent 60%),
+    radial-gradient(50rem 30rem at 50% 100%, rgba(206, 178, 235, 0.3), transparent 60%),
+    var(--canvas);
+}
+
+/* Números alineados en tablas y totales */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

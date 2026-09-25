@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 import Link from 'next/link'
+import { btn, cx, inputCls } from '@/components/ui'
 import { login, type LoginState } from './actions'
 
 export default function LoginForm() {
@@ -10,14 +11,14 @@ export default function LoginForm() {
   return (
     <form action={formAction} className="flex flex-col gap-4">
       {state?.error && (
-        <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+        <div role="alert" className="rounded-md bg-bad/10 px-4 py-3 text-sm text-bad">
           {state.error}
         </div>
       )}
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="email" className="text-sm font-medium text-zinc-700">
-          Email
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="email" className="text-sm font-medium text-ink">
+          Correo
         </label>
         <input
           id="email"
@@ -25,13 +26,13 @@ export default function LoginForm() {
           type="email"
           autoComplete="email"
           required
-          className="rounded-lg border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 disabled:opacity-50"
-          placeholder="tu@email.com"
+          className={inputCls}
+          placeholder="tu@correo.com"
         />
       </div>
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="password" className="text-sm font-medium text-zinc-700">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="password" className="text-sm font-medium text-ink">
           Contraseña
         </label>
         <input
@@ -40,22 +41,18 @@ export default function LoginForm() {
           type="password"
           autoComplete="current-password"
           required
-          className="rounded-lg border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 disabled:opacity-50"
+          className={inputCls}
           placeholder="••••••••"
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="mt-2 rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {pending ? 'Ingresando...' : 'Ingresar'}
+      <button type="submit" disabled={pending} className={cx(btn.primary, 'mt-2')}>
+        {pending ? 'Ingresando…' : 'Ingresar'}
       </button>
 
-      <p className="text-center text-sm text-zinc-500">
+      <p className="text-center text-sm text-muted">
         ¿No tienes cuenta?{' '}
-        <Link href="/signup" className="font-medium text-zinc-900 hover:underline">
+        <Link href="/signup" className="font-medium text-ink underline-offset-2 hover:underline">
           Crear cuenta
         </Link>
       </p>

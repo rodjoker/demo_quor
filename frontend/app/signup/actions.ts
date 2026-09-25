@@ -27,5 +27,5 @@ export async function signup(prevState: SignupState, formData: FormData): Promis
     return { error: error.message }
   }
 
-  redirect('/dashboard')
+  redirect('/')
 }
