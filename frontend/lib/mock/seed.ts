@@ -136,7 +136,7 @@ function buildEvents(startIso: string, status: OrderStatus): OrderEvent[] {
     from: i === 0 ? null : chain[i - 1],
     to,
     at: new Date(start + i * 12 * 60_000).toISOString(),
-    by: to === 'preparando' || to === 'despachado' ? STAFF.bodega : i === 0 ? 'Sistema' : STAFF.vendedor,
+    by: to === 'despachado' ? STAFF.bodega : i === 0 ? 'Sistema' : STAFF.vendedor,
     ...(to === 'cancelado' ? { reason: 'El cliente se arrepintió' } : {}),
   }))
 }
