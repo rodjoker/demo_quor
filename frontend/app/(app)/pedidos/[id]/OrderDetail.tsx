@@ -7,7 +7,7 @@ import { Card, Modal, OrderStatusBadge, ProductThumb, Toast, btn, cx, inputCls }
 import { formatCOP, formatDateTime, formatOrderNumber } from '@/lib/format'
 import { useStore } from '@/lib/data/context'
 import { StoreError } from '@/lib/data/types'
-import { nextStatuses } from '@/lib/order-flow'
+import { canMoveTo, nextStatuses } from '@/lib/order-flow'
 import { can } from '@/lib/roles'
 import type { Customer, OrderStatus, Product, Role } from '@/lib/types'
 
@@ -54,10 +54,7 @@ export default function OrderDetail({ id, role, ownCustomerId }: { id: string; r
   const pending = order.items.filter(i => i.requested > i.confirmed)
 
   // Qué botones ve cada rol (la base de datos vuelve a validarlo)
-  const actions = nextStatuses(order.status).filter(s => {
-    if (can.changeStatus(role)) return true
-    return role === 'bodega' && (s === 'preparando' || s === 'despachado')
-  })
+  const actions = nextStatuses(order.status).filter(s => canMoveTo(role, s))
 
   const change = async (to: OrderStatus, why?: string) => {
     if (busy) return // evita el doble clic

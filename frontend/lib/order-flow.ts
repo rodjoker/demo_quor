@@ -11,3 +11,8 @@ export const TRANSITIONS: Record<OrderStatus, OrderStatus[]> = {
 }
 
 export const nextStatuses = (s: OrderStatus) => TRANSITIONS[s]
+
+// Quién puede llevar un pedido a cada estado: despachar es solo de bodega (y admin);
+// el resto de cambios (aprobar, enviar a preparar, cancelar) son del vendedor (y admin).
+export const canMoveTo = (role: string, to: OrderStatus) =>
+  to === 'despachado' ? role === 'admin' || role === 'bodega' : role === 'admin' || role === 'vendedor'

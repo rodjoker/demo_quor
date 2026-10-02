@@ -8,7 +8,7 @@
 import { useSyncExternalStore } from 'react'
 import { buildSeed, PRODUCT_BY_ID, type SeedState } from './seed'
 import { StoreError, type PlaceOrderResult } from '../data/types'
-import { TRANSITIONS } from '../order-flow'
+import { TRANSITIONS, canMoveTo } from '../order-flow'
 import type { Channel, Order, OrderItem, OrderStatus, Role } from '../types'
 
 export type State = SeedState
@@ -117,9 +117,7 @@ export function setOrderStatus(orderId: string, to: OrderStatus, role: Role, by:
   if (!TRANSITIONS[order.status].includes(to)) {
     throw new StoreError('invalid_transition', `No se puede pasar de ${order.status} a ${to}.`)
   }
-  const isStaff = role === 'admin' || role === 'vendedor'
-  const warehouseStep = (to === 'preparando' || to === 'despachado') && role === 'bodega'
-  if (!isStaff && !warehouseStep) throw new StoreError('forbidden', 'No tienes permiso para este cambio.')
+  if (!canMoveTo(role, to)) throw new StoreError('forbidden', 'No tienes permiso para este cambio.')
 
   const now = new Date().toISOString()
   const stock = { ...state.stock }

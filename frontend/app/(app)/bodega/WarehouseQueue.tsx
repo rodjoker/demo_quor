@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Clock, PackageCheck, Truck } from 'lucide-react'
+import { PackageCheck, Truck } from 'lucide-react'
 import { Card, EmptyState, PageHeader, Toast, btn, cx } from '@/components/ui'
 import { formatDateTime, formatOrderNumber } from '@/lib/format'
 import { useStore } from '@/lib/data/context'
@@ -22,16 +22,15 @@ export default function WarehouseQueue() {
 
   // Más antiguos primero: se despacha en orden de llegada
   const oldestFirst = (a: Order, b: Order) => a.createdAt.localeCompare(b.createdAt)
-  const toPrepare = orders.filter(o => o.status === 'recibido' || o.status === 'aprobado').sort(oldestFirst)
   const preparing = orders.filter(o => o.status === 'preparando').sort(oldestFirst)
   const dispatched = orders.filter(o => o.status === 'despachado')
 
-  const move = async (o: Order, to: 'preparando' | 'despachado') => {
+  const move = async (o: Order, to: 'despachado') => {
     if (busyId) return // una acción a la vez
     setBusyId(o.id)
     try {
       await setOrderStatus(o.id, to)
-      flash(to === 'preparando' ? `${formatOrderNumber(o.number)} en preparación.` : `${formatOrderNumber(o.number)} despachado.`)
+      flash(`${formatOrderNumber(o.number)} despachado.`)
     } catch (e) {
       flash(e instanceof StoreError ? e.message : 'No se pudo actualizar.', 'error')
     } finally {
@@ -47,7 +46,7 @@ export default function WarehouseQueue() {
     <>
       <PageHeader
         title="Bodega"
-        subtitle="Pedidos listos para alistar, en orden de llegada. El inventario ya está descontado."
+        subtitle="Pedidos que el vendedor envió a preparar, en orden de llegada. Alístalos y márcalos como despachados."
         actions={
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-xs font-medium text-ink tnum">
             <Truck className="size-3.5" aria-hidden /> {dispatched.length} despachados
@@ -55,37 +54,16 @@ export default function WarehouseQueue() {
         }
       />
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <section aria-labelledby="col-prepare">
-          <h2 id="col-prepare" className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
-            <Clock className="size-4 text-muted" aria-hidden /> Por preparar
-            <span className="rounded-full bg-pink-soft px-2 py-0.5 text-xs tnum">{toPrepare.length}</span>
-          </h2>
-          <div className="space-y-4">
-            {toPrepare.length === 0 && (
-              <Card>
-                <EmptyState title="No hay pedidos esperando" hint="Cuando entre uno nuevo aparece aquí solo." />
-              </Card>
-            )}
-            {toPrepare.map(o => (
-              <OrderCard key={o.id} order={o}>
-                <button className={cx(btn.primary, 'w-full')} disabled={busyId === o.id} onClick={() => void move(o, 'preparando')}>
-                  <PackageCheck className="size-4" aria-hidden /> Empezar a preparar
-                </button>
-              </OrderCard>
-            ))}
-          </div>
-        </section>
-
+      <div className="max-w-2xl">
         <section aria-labelledby="col-preparing">
           <h2 id="col-preparing" className="mb-3 flex items-center gap-2 text-sm font-semibold text-ink">
-            <PackageCheck className="size-4 text-muted" aria-hidden /> Preparando
+            <PackageCheck className="size-4 text-muted" aria-hidden /> Por alistar y despachar
             <span className="rounded-full bg-[#fff1d1] px-2 py-0.5 text-xs tnum">{preparing.length}</span>
           </h2>
           <div className="space-y-4">
             {preparing.length === 0 && (
               <Card>
-                <EmptyState title="Nada en preparación" hint="Empieza uno desde la columna de la izquierda." />
+                <EmptyState title="No hay pedidos para despachar" hint="Cuando el vendedor envíe uno a preparar aparece aquí solo." />
               </Card>
             )}
             {preparing.map(o => (
